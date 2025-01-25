@@ -1,0 +1,120 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>관리자 페이지</title>
+<link rel="stylesheet" href="/css/board.css">
+<style>
+.menubar {
+	width: 100%;
+	height: auto;
+	background-color: #168;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center
+}
+.menubar a:link, a:visited, a:active {
+	color: white;
+	font-weight: bold;
+}
+
+.menubar a {
+	display: block;
+	text-decoration: none;
+}
+
+.menubar .main_menu > li {
+	float: left;
+	width: 20%;
+	height: 100%;
+	line-height: 50px;
+	list-style: none;
+	font-weight: bold;
+	position: relative;
+	margin: 0px;	
+}
+
+.menubar .main_menu > li > a:hover {
+	background-color: #f0f6f9;
+	color: #168;
+	font-weight: bold;
+}
+
+.menubar .main_menu .sub_menu {
+	list-style: none;
+	display: none;
+	position: absolute;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #c7d1db;
+	width: 100%;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.menubar .main_menu>li:hover .sub_menu {
+    display:block;
+}
+.sub_menu a {
+	color: black;
+	padding: 8px;
+	text-decoration: none;
+	display: block;
+}
+.sub_menu a:hover { 
+	background-color: #4675a4; 
+}
+
+</style>
+</head>
+<body>
+
+<div class="menubar">
+	<ul class="main_menu">
+		<li><a href="/board/list?page=1">홈으로</a></li>
+		<li><a href="#">사용자 통계</a>
+			<ul class="sub_menu">
+				<li><a href="/master/sysMemberCount">전체 회원 숫자</a></li>
+				<li><a href="/master/sysMemberPostCount">게시물 갯수</a></li>
+				<li><a href="/master/sysMemberReplyCount">댓글 갯수</a></li>
+			</ul>
+		</li>	
+		<li><a href="/master/sysFileManage">첨부파일 관리</a></li>
+		<li><a href="/master/sysBoardManage?page=1">게시판 관리</a></li>
+		<li><a href="/master/sysSystemInfo">시스템 정보</a></li>
+	</ul>
+</div>
+
+<br><br><br>
+<table class="InfoTable">
+    <thead>
+        <tr>
+            <th>구분</th>
+            <th>회원 수</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>전체 회원 수</td>
+            <td th:text="${TOTAL_COUNT}"></td>
+        </tr>
+        <tr>
+            <td>남성 회원 수</td>
+            <td th:text="${MALE_COUNT}"></td>
+        </tr>
+        <tr>
+            <td>여성 회원 수</td>
+            <td th:text="${FEMALE_COUNT}"></td>
+        </tr>
+        <tr>
+            <td>Master Role 회원 수</td>
+            <td th:text="${MASTER_COUNT}"></td>
+        </tr>
+        <tr>
+            <td>User Role 회원 수</td>
+            <td th:text="${USER_COUNT}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

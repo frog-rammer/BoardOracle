@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>패스워드 변경 여부 확인</title>
+<link rel="stylesheet" href="/css/board.css">
+<script>
+const passwordUpdate =()=> {
+	document.location.href='/member/memberPasswordModify';
+}
+const changeAfter30Days = () =>{
+	fetch('/member/pwcheckUpdate',{
+		method: "POST",
+		body: new FormData()
+	}).then((response) => response.json())
+		.then((data) => {
+			if(data.message === 'GOOD'){
+				alert("30일 후에 변경합니다.");
+				document.location.href='/board/list?page=1';
+			}else {
+				alert("시스템 장애로 실패 했습니다.");
+			}
+		}).catch((error)=> {
+			console.log("error = " + error);
+		});
+}
+	
+</script>
+</head>
+<body>
+<div class="main">
+
+	<div>
+		<img src="/images/logo.jpg" id="topBanner">
+	</div>
+	
+	<div class="ModifyForm">
+		<h1>패스워드를 변경해 주세요.</h1><br>
+		<input type="button" class="btn_write" value="30일 후에 변경" onclick="changeAfter30Days()">
+		<input type="button" class="btn_cancel" value="지금 변경" onclick="passwordUpdate()">
+	</div>
+
+</div>
+</body>
+</html>
